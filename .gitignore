@@ -1,1 +1,13 @@
-test.rb
+/test.rb
+/.bundle
+/Gemfile.lock
+/coverage
+/rdoc
+/doc
+/.yardoc
+/.bundle
+/pkg
+/log
+/features/settings.yml
+/test.log
+/tmp
