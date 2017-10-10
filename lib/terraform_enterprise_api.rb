@@ -2,6 +2,7 @@ require 'json'
 require 'rest-client'
 
 require 'terraform_enterprise_api/resources/workspaces'
+require 'terraform_enterprise_api/resources/organizations'
 require 'terraform_enterprise_api/resources/policies'
 require 'terraform_enterprise_api/resource'
 
