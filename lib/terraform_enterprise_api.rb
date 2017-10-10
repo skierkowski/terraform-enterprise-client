@@ -56,28 +56,35 @@ module TerraformEnterprise
       request(:patch,path,data)
     end
 
-    private
-
-    def uri(path=[])
-      "#{@base}/#{path.map{|p| p.to_s}.join('/')}"
-    end
-
-    def request(method, path, data={})
+    def request(method, path, data={}, headers={})
       request = {
         method:  method,
         url:     uri(path),
-        headers: @headers || {}
+        headers: @headers.merge(headers || {})
       }
-      if method==:get || method==:delete
+      if method==:get || method==:delete || (request[:headers]['Content-Type'] != 'application/vnd.api+json' && request[:headers]['Content-Type'] != 'application/json')
         request[:headers][:params] = data
       else
         request[:payload] = data.to_json
       end
       puts request if ENV['DEBUG']
-      data = JSON.parse(RestClient::Request.execute(request))['data']
-      data.is_a?(Array) ? data.map{|r| Resource.new(data:r, client:self)} : Resource.new(data:data, client:self)
+      response = RestClient::Request.execute(request)
+      puts response if ENV['DEBUG']
+      if response.headers[:content_type] && response.headers[:content_type].include?('json')
+        data = JSON.parse(response)['data']
+        return_data = data.is_a?(Array) ? data.map{|r| Resource.new(data:r, client:self)} : Resource.new(data:data, client:self)
+      else
+        return_data = respons.body
+      end
+      return_data
     rescue => ex
       raise ArgumentError, "#{ex.message}: #{request}"
+    end
+
+    private
+
+    def uri(path=[])
+      "#{@base}/#{path.map{|p| p.to_s}.join('/')}"
     end
   end
 end
