@@ -4,6 +4,7 @@ require 'rest-client'
 require 'terraform_enterprise_api/resources/workspaces'
 require 'terraform_enterprise_api/resources/organizations'
 require 'terraform_enterprise_api/resources/policies'
+require 'terraform_enterprise_api/resources/linkable-repos'
 require 'terraform_enterprise_api/resource'
 
 module TerraformEnterprise
@@ -29,6 +30,10 @@ module TerraformEnterprise
 
     def policies
       TerraformEnterprise::Policies.new(self)
+    end
+
+    def linkable_repos
+      TerraformEnterprise::LinkableRepos.new(self)
     end
 
     def get(*path)
