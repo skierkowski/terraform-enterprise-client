@@ -78,7 +78,7 @@ module TerraformEnterprise
       if response.headers[:content_type] && response.headers[:content_type].include?('json')
         return_data = JSON.parse(response)['data']
       else
-        return_data = respons.body
+        return_data = response.body
       end
       return_data
     rescue => ex
