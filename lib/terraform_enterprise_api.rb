@@ -76,8 +76,7 @@ module TerraformEnterprise
       response = RestClient::Request.execute(request)
       puts response if ENV['DEBUG']
       if response.headers[:content_type] && response.headers[:content_type].include?('json')
-        data = JSON.parse(response)['data']
-        return_data = data.is_a?(Array) ? data.map{|r| Resource.new(data:r, client:self)} : Resource.new(data:data, client:self)
+        return_data = JSON.parse(response)['data']
       else
         return_data = respons.body
       end
