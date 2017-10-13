@@ -15,7 +15,13 @@ module TerraformEnterprise
 
     def create(params={})
       org = params.delete(:organization)
-      @client.post(:organizations, org, :policies, params)
+
+      data = {
+        attributes: params,
+        type: 'policies'
+      }
+
+      @client.post(:organizations, org, :policies, {data: data})
     end
 
     def delete(params={})
@@ -23,21 +29,16 @@ module TerraformEnterprise
       @client.delete(:policies, id)
     end
 
-    def upload(params={})
-      id      = params[:policy]
-      headers = {
-        "Content-Type" => "application/octet-stream",
-        "Accept" => "text/plain"
-      }
-      @client.request(:get, [:policies, id, :download], {}, headers)
+    def download(params={})
+      id = params[:policy]
+      @client.get(:policies, id, :download)
     end
 
     def upload(params={})
       id      = params[:policy]
       content = params[:content]
       headers = {
-        "Content-Type" => "application/octet-stream",
-        "Accept" => "text/plain"
+        'Content-Type' => 'application/octet-stream'
       }
       @client.request(:put, [:policies, id, :upload],content, headers)
     end
