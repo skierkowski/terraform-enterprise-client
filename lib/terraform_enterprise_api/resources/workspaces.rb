@@ -14,14 +14,12 @@ module TerraformEnterprise
     end
 
     def create(params={})
-      org = params.delete(:organization)
-
       data = {
         attributes: params,
         type: 'compound-workspaces'
       }
 
-      @client.post(:organizations, org, :workspaces, data: data)
+      @client.post('compound-workspaces', data: data)
     end
 
     def update(params={})
