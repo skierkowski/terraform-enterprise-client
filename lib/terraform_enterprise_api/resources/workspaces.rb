@@ -33,5 +33,11 @@ module TerraformEnterprise
 
       @client.patch('compound-workspaces', id, data: data)
     end
+
+    def delete(params={})
+      org = params.delete(:organization)
+      id  = params.delete(:workspace)
+      @client.delete(:organizations, org, :workspaces, id)
+    end
   end
 end
