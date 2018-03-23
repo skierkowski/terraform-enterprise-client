@@ -17,5 +17,7 @@ Gem::Specification.new do |gem|
   gem.extra_rdoc_files = ['LICENSE.txt', 'README.md']
 
   gem.add_dependency 'rest-client', '~> 2.0.2'
+  gem.add_dependency 'colorize', '~> 0.8.1'
+  gem.add_dependency 'thor', '~> 0.20.0'
   gem.add_dependency 'json', '~> 2.1.0'
 end
