@@ -1,12 +1,12 @@
 # encoding: utf-8
 $:.push File.expand_path("../lib", __FILE__)
-require File.expand_path('../lib/terraform_enterprise_api/version', __FILE__)
+require File.expand_path('../lib/terraform-enterprise/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.name          = 'terraform_enterprise_api'
+  gem.name          = 'terraform-enterprise-client'
   gem.authors       = [ "Maciej Skierkowski" ]
   gem.email         = ''
-  gem.homepage      = 'http://github.com/skierkowski/terraform_enterprise_api'
+  gem.homepage      = 'http://github.com/skierkowski/terraform-enterprise-client'
   gem.summary       = 'Ruby client for the official Terraform Enterprise API'
   gem.description   = %q{ Ruby client that supports all of the Terraform Enterprise API methods. }
   gem.version       = TerraformEnterprise::VERSION

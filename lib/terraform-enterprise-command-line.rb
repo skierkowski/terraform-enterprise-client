@@ -1,9 +1,9 @@
 require 'thor'
 
-require 'terraform_enterprise_api/version'
-require 'terraform_enterprise_api/commands/organizations_command'
-require 'terraform_enterprise_api/commands/workspaces_command'
-require 'terraform_enterprise_api/commands/oauth_tokens_command'
+require 'terraform-enterprise/version'
+require 'terraform-enterprise/commands/organizations_command'
+require 'terraform-enterprise/commands/workspaces_command'
+require 'terraform-enterprise/commands/oauth_tokens_command'
 
 module TerraformEnterprise
   class CommandLine < Thor

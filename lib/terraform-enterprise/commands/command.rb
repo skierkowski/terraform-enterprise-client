@@ -1,6 +1,8 @@
 require 'yaml'
 require 'colorize'
 
+require 'terraform-enterprise-client'
+
 module TerraformEnterprise
   module Commands
     class Command < Thor

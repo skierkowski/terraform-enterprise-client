@@ -1,9 +1,9 @@
 require 'json'
 require 'rest-client'
 
-require 'terraform_enterprise_api/resources/organizations'
-require 'terraform_enterprise_api/resources/oauth-tokens'
-require 'terraform_enterprise_api/resources/workspaces'
+require 'terraform-enterprise/resources/organizations'
+require 'terraform-enterprise/resources/oauth-tokens'
+require 'terraform-enterprise/resources/workspaces'
 
 module TerraformEnterprise
   class Client

@@ -1,5 +1,5 @@
-require 'terraform_enterprise_api/commands/command'
-require 'terraform_enterprise_api'
+require 'terraform-enterprise/commands/command'
+require 'terraform-enterprise-client'
 
 module TerraformEnterprise
   module Commands

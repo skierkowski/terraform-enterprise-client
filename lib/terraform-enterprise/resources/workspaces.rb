@@ -1,4 +1,4 @@
-require "terraform_enterprise_api/resources_client"
+require "terraform-enterprise/resources_client"
 
 module TerraformEnterprise  
   class Workspaces < ResourcesClient
