@@ -1,6 +1,7 @@
 /test.rb
 /.bundle
 /Gemfile.lock
+/*.gem
 /coverage
 /rdoc
 /doc
