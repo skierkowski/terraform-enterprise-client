@@ -3,14 +3,11 @@ require "terraform-enterprise/resources_client"
 module TerraformEnterprise  
   class Workspaces < ResourcesClient
     def list(params={})
-      org = params[:organization]
-      @client.get(:organizations, org, :workspaces)
+      @client.get(:organizations, params[:organization], :workspaces)
     end
 
     def get(params={})
-      org = params[:organization]
-      id  = params[:workspace]
-      @client.get(:organizations, org, :workspaces, id)
+      @client.get(:organizations, params[:organization], :workspaces, params[:workspace])
     end
 
     def create(params={})
