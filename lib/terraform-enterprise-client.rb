@@ -68,7 +68,7 @@ module TerraformEnterprise
           request[:payload] = data.is_a?(String) ? data : data.to_json
         end
       end
-      puts request
+
       response = begin
         RestClient::Request.execute(request)
       rescue RestClient::ExceptionWithResponse => ex

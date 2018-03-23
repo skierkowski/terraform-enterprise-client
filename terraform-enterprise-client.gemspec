@@ -5,12 +5,12 @@ require File.expand_path('../lib/terraform-enterprise/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name          = 'terraform-enterprise-client'
   gem.authors       = [ "Maciej Skierkowski" ]
-  gem.email         = ''
+  gem.email         = 'maciej@skierkowski.com'
   gem.homepage      = 'http://github.com/skierkowski/terraform-enterprise-client'
   gem.summary       = 'Ruby client for the official Terraform Enterprise API'
   gem.description   = %q{ Ruby client that supports all of the Terraform Enterprise API methods. }
   gem.version       = TerraformEnterprise::VERSION
-  gem.required_ruby_version = '>= 2.3.1'
+  gem.required_ruby_version = '>= 2.0.0'
 
   gem.files = Dir['{lib}/**/*']
   gem.require_paths = %w[ lib ]
@@ -19,5 +19,4 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rest-client', '~> 2.0.2'
   gem.add_dependency 'colorize', '~> 0.8.1'
   gem.add_dependency 'thor', '~> 0.20.0'
-  gem.add_dependency 'json', '~> 2.1.0'
 end
