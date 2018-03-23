@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir['{lib}/**/*']
   gem.require_paths = %w[ lib ]
-  gem.extra_rdoc_files = ['LICENSE.txt', 'README.md']
+  gem.extra_rdoc_files = ['LICENSE', 'README.md']
 
   gem.add_dependency 'rest-client', '~> 2.0.2'
   gem.add_dependency 'colorize', '~> 0.8.1'
