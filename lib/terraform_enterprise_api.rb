@@ -2,17 +2,17 @@ require 'json'
 require 'rest-client'
 
 require 'terraform_enterprise_api/resources/configuration-versions'
-require 'terraform_enterprise_api/resources/linkable-repos'
 require 'terraform_enterprise_api/resources/organizations'
 require 'terraform_enterprise_api/resources/policies'
 require 'terraform_enterprise_api/resources/runs'
+require 'terraform_enterprise_api/resources/oauth-tokens'
 require 'terraform_enterprise_api/resources/workspaces'
 
 module TerraformEnterprise
   class Client
     attr_accessor :base
 
-    def initialize(api_key:, host: 'https://atlas.hashicorp.com/api/v2')
+    def initialize(api_key:, host: 'https://app.terraform.io/api/v2')
       @base    = host
       @api_key = api_key
       @headers = {
@@ -33,16 +33,14 @@ module TerraformEnterprise
       TerraformEnterprise::Policies.new(self)
     end
 
-    def linkable_repos
-      TerraformEnterprise::LinkableRepos.new(self)
-    end
-
     def configuration_versions
       TerraformEnterprise::ConfigurationVersions.new(self)
     end
 
     def runs
       TerraformEnterprise::Runs.new(self)
+    def oauth_tokens
+      TerraformEnterprise::OAuthTokens.new(self)
     end
 
     def get(*path)
@@ -76,24 +74,26 @@ module TerraformEnterprise
         url:     uri(path),
         headers: @headers.merge(headers || {})
       }
-      # if method==:get || method==:delete || (request[:headers]['Content-Type'] != 'application/vnd.api+json' && request[:headers]['Content-Type'] != 'application/json')
-      if method==:get || method==:delete
-        request[:headers][:params] = data
-      else
-        request[:payload] = data.is_a?(String) ? data : data.to_json
+      if data
+        if method==:get || method==:delete
+          request[:headers][:params] = data
+        else
+          request[:payload] = data.is_a?(String) ? data : data.to_json
+        end
       end
-      puts request if ENV['DEBUG']
-      response = RestClient::Request.execute(request)
-      puts response if ENV['DEBUG']
+      puts request
+      response = begin
+        RestClient::Request.execute(request)
+      rescue RestClient::ExceptionWithResponse => ex
+        ex.response
+      end
+
       if response.headers[:content_type] && response.headers[:content_type].include?('json')
-        parsed_data = JSON.parse(response) || {}
-        return_data = parsed_data['data']
+        return_data = JSON.parse(response) || {}
       else
         return_data = response.body
       end
-      return_data
-    rescue => ex
-      raise ArgumentError, "#{ex.message}: #{request}"
+      {'code' => response.code, 'body' => return_data}
     end
 
     private

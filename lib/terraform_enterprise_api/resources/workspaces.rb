@@ -14,12 +14,13 @@ module TerraformEnterprise
     end
 
     def create(params={})
+      org = params.delete(:organization)
       data = {
         attributes: params,
-        type: 'compound-workspaces'
+        type: 'workspaces'
       }
 
-      @client.post('compound-workspaces', data: data)
+      @client.post(:organizations, org, :workspaces, data: data)
     end
 
     def update(params={})
@@ -28,16 +29,18 @@ module TerraformEnterprise
 
       data = {
         attributes: params,
-        type: 'compound-workspaces'
+        type: 'workspaces'
       }
 
-      @client.patch('compound-workspaces', id, data: data)
+      @client.patch(:organizations, org, :workspaces, id, data: data)
     end
 
     def delete(params={})
-      org = params.delete(:organization)
-      id  = params.delete(:workspace)
-      @client.delete(:organizations, org, :workspaces, id)
+      @client.delete(:organizations, params[:organization], :workspaces, params[:workspace])
+    end
+
+    def action(params={})
+      @client.post(:workspaces, params[:id], :actions, params[:action].to_sym)
     end
   end
 end
