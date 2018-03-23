@@ -1,10 +1,7 @@
 require 'json'
 require 'rest-client'
 
-require 'terraform_enterprise_api/resources/configuration-versions'
 require 'terraform_enterprise_api/resources/organizations'
-require 'terraform_enterprise_api/resources/policies'
-require 'terraform_enterprise_api/resources/runs'
 require 'terraform_enterprise_api/resources/oauth-tokens'
 require 'terraform_enterprise_api/resources/workspaces'
 
@@ -29,16 +26,6 @@ module TerraformEnterprise
       TerraformEnterprise::Organizations.new(self)
     end
 
-    def policies
-      TerraformEnterprise::Policies.new(self)
-    end
-
-    def configuration_versions
-      TerraformEnterprise::ConfigurationVersions.new(self)
-    end
-
-    def runs
-      TerraformEnterprise::Runs.new(self)
     def oauth_tokens
       TerraformEnterprise::OAuthTokens.new(self)
     end
