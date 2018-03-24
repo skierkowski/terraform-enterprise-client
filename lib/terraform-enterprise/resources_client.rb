@@ -1,8 +1,8 @@
 module TerraformEnterprise  
   class ResourcesClient
-    def initialize(client, params={})
-      @client = client
-      @params = params
+    def initialize(request, params={})
+      @request = request
+      @params  = params
     end
   end
 end

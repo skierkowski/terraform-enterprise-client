@@ -3,11 +3,11 @@ require "terraform-enterprise/resources_client"
 module TerraformEnterprise  
   class Workspaces < ResourcesClient
     def list(params={})
-      @client.get(:organizations, params[:organization], :workspaces)
+      @request.get(:organizations, params[:organization], :workspaces)
     end
 
     def get(params={})
-      @client.get(:organizations, params[:organization], :workspaces, params[:workspace])
+      @request.get(:organizations, params[:organization], :workspaces, params[:workspace])
     end
 
     def create(params={})
@@ -17,7 +17,7 @@ module TerraformEnterprise
         type: 'workspaces'
       }
 
-      @client.post(:organizations, org, :workspaces, data: data)
+      @request.post(:organizations, org, :workspaces, data: data)
     end
 
     def update(params={})
@@ -29,15 +29,15 @@ module TerraformEnterprise
         type: 'workspaces'
       }
 
-      @client.patch(:organizations, org, :workspaces, id, data: data)
+      @request.patch(:organizations, org, :workspaces, id, data: data)
     end
 
     def delete(params={})
-      @client.delete(:organizations, params[:organization], :workspaces, params[:workspace])
+      @request.delete(:organizations, params[:organization], :workspaces, params[:workspace])
     end
 
     def action(params={})
-      @client.post(:workspaces, params[:id], :actions, params[:action].to_sym)
+      @request.post(:workspaces, params[:id], :actions, params[:action].to_sym)
     end
   end
 end

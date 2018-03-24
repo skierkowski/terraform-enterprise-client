@@ -3,11 +3,11 @@ require "terraform-enterprise/resources_client"
 module TerraformEnterprise  
   class Organizations < ResourcesClient
     def list(params={})
-      @client.get(:organizations)
+      @request.get(:organizations)
     end
 
     def get(params={})
-      @client.get(:organizations, params[:name])
+      @request.get(:organizations, params[:name])
     end
 
     def create(params={})
@@ -16,11 +16,11 @@ module TerraformEnterprise
         type: 'organizations'
       }
 
-      @client.post(:organizations, data: data)
+      @request.post(:organizations, data: data)
     end
 
     def delete(params={})
-      @client.delete(:organizations, params[:name])
+      @request.delete(:organizations, params[:name])
     end
   end
 end

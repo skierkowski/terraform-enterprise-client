@@ -9,17 +9,16 @@ module TerraformEnterprise
       class_option :color, type: :boolean, default: true
 
       no_commands do
-        def render(obj)
+        def render(obj, render_options={})
           String.disable_colorization = !options['color']
 
-          if obj['code'] && obj['body']
-            if obj['code'] == 200
+          if obj.is_a?(TerraformEnterprise::API::Response)
+            if obj.code == 200
               puts "Success".green
-              data = obj['body']['data'] ? obj['body']['data'] : obj['body']
-              puts data.to_yaml
+              puts obj.data.to_yaml
             elsif
-              if obj['body']['errors']
-                obj['body']['errors'].each do |error|
+              if obj.body['errors']
+                obj.body['errors'].each do |error|
                   puts "Error (#{error['status']}): #{error['title']}".red
                 end
               else
