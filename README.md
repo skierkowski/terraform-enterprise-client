@@ -15,11 +15,13 @@ This gem depends on these other gems for usage at runtime:
 - [colorize](https://github.com/fazibear/colorize)
 - [thor](https://github.com/erikhuda/thor)
 
-## Usage
+## API Client
+
+### Usage
 
 
 
-### Basic Example
+#### Basic Example
 
 ```ruby
 require 'terraform-enterprise-client'
@@ -58,3 +60,21 @@ The number of supported resources is a subset of the resources exposed via the T
 - `Client#workspaces`
 - `Client#organizations`
 - `Client#oauth_tokens`
+
+## Command Line Tool
+
+Installing the gem installs the `tfe` command line tool. Running `tfe help` provides the help information and list of available subcomands.
+
+### Usage
+
+All of the resources, actions and paraeters are documented in the tool and available through the `help` subcommand.
+
+#### Basic Usage
+```shell
+➭ tfe help
+Commands:
+  tfe help [COMMAND]              # Describe available commands or one specific command
+  tfe oauth_tokens <subcommand>   # Manage OAuth tokens
+  tfe organizations <subcommand>  # Manage organizations
+  tfe workspaces <subcommand>     # Manage workspaces
+```
