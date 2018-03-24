@@ -19,7 +19,7 @@ module TerraformEnterprise
       option :branch, type: :string, desc: "Repository branch that Terraform will execute from."
       option :ingress_submodules, type: :boolean, default: false, desc: "Submodules should be fetched when cloning the VCS repository."
       option :repo, type: :string, desc: 'Reference to VCS repository in the format :org/:repo'
-      option :import_repo, type: :string, desc: ''
+      option :import_legacy_environment, type: :string, desc: 'Specifies the legacy Environment to use as the source of the migration'
       def create(name)
         params = {
           organization: options[:organization],
@@ -33,7 +33,7 @@ module TerraformEnterprise
           }
         }
 
-        params['migration-environment'] = options[:import_repo] if options[:import_repo]
+        params['migration-environment'] = options[:import_legacy_environment] if options[:import_legacy_environment]
         params['terraform_version']     = options[:terraform_version] if options[:terraform_version]
         
         render client.workspaces.create(params)
