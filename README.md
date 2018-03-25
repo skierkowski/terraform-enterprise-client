@@ -78,3 +78,12 @@ Commands:
   tfe organizations <subcommand>  # Manage organizations
   tfe workspaces <subcommand>     # Manage workspaces
 ```
+
+### Scripting
+The CLI is designed to be easy to call from other scripts. A few command line options exist to control the output format to minimize the string parsing needed to extract the desired data from the output:
+
+- `no-color` (Boolean, default: false): Removes ANSI color codes from output
+- `except` (Array): Exclude particular fields from the output from being returned. This is a space-separated list of fields to be excluded from the output.
+- `only` (Array): Only return the fields selected in this space-separated list of field keys.
+- `all` (Boolean, default: false): By default most commands only return a subset of fields. Many of the APIs return additional attributes which are used by the UI and likely have little value to you. As such, they are excluded by default. This option will return all of the fields, not just the subset.
+- `value` (Boolean, default: false): The output text by default shows the key and values for each field. If this option is enabled only the value of the fields will be returned. This is particularly useful if you would like to obtain the id of a newly created resource (e.g. `tfe workspcaces create new-ws --organization my-organization --only name --value` would return only the name of the created workspace)
