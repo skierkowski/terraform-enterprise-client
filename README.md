@@ -71,6 +71,7 @@ Installing the gem installs the `tfe` command line tool. Running `tfe help` prov
 All of the resources, actions and paraeters are documented in the tool and available through the `help` subcommand.
 
 #### Basic Usage
+
 ```shell
 ➭ tfe help
 Commands:
@@ -80,7 +81,12 @@ Commands:
   tfe workspaces <subcommand>     # Manage workspaces
 ```
 
+### Authentication
+
+There are two methods for authenticating the CLI with the Terraform Enterprise API. The first is to use the `TERRAFORM_ENTERPRISE_TOKEN` environment variable. The second is to pass in the token on the command line using the `--token` option. The command line option takes precendence over the environment variable.
+
 ### Scripting
+
 The CLI is designed to be easy to call from other scripts. A few command line options exist to control the output format to minimize the string parsing needed to extract the desired data from the output:
 
 - `--no-color` (Boolean, default: false): Removes ANSI color codes from output
