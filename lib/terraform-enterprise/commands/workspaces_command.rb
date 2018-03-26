@@ -3,23 +3,25 @@ require 'terraform-enterprise/commands/command'
 module TerraformEnterprise
   module Commands
     class WorkspacesCommand < TerraformEnterprise::Commands::Command
+      ATTR_STR = STRINGS[:workspaces][:attributes]
+      CMD_STR = STRINGS[:workspaces][:commands]
 
-      desc 'list', 'Lists all workspaces in the organization'
-      option :organization, required: true, type: :string, desc: 'Organization name'
-      option :table, type: :boolean, default: true, desc: 'Format output in a table'
+      desc 'list', CMD_STR[:list]
+      option :organization, required: true, type: :string, desc: ATTR_STR[:organization]
+      option :table, type: :boolean, default: true, desc: STRINGS[:options][:table]
       def list
         render client.workspaces.list(options), except:[:permissions, :actions, :environment, 'created-at']
       end
 
-      desc 'create <name>', 'Creates a new organization'
-      option :terraform_version, type: :string, desc: "Version of Terraform to use for this workspace."
-      option :working_directory, type: :string, desc: "Relative path that Terraform will execute within."
-      option :oauth_token, type: :string, desc: 'VCS Connection (OAuth Conection + Token) to use as identified; obtained from the oauth_tokens subcommand.'
-      option :branch, type: :string, desc: "Repository branch that Terraform will execute from."
-      option :ingress_submodules, type: :boolean, desc: "Submodules should be fetched when cloning the VCS repository."
-      option :repo, type: :string, desc: 'Reference to VCS repository in the format :org/:repo'
-      option :import_legacy_environment, type: :string, desc: 'Specifies the legacy Environment to use as the source of the migration'
-      option :organization, required: true, type: :string, desc: 'Organization name'
+      desc 'create <name>', CMD_STR[:create]
+      option :terraform_version, type: :string, desc: ATTR_STR[:terraform_version]
+      option :working_directory, type: :string, desc: ATTR_STR[:working_directory]
+      option :oauth_token, type: :string, desc: ATTR_STR[:oauth_token]
+      option :branch, type: :string, desc: ATTR_STR[:branch]
+      option :ingress_submodules, type: :boolean, desc: ATTR_STR[:ingress_submodules]
+      option :repo, type: :string, desc: ATTR_STR[:repos]
+      option :import_legacy_environment, type: :string, desc: ATTR_STR[:import_legacy]
+      option :organization, required: true, type: :string, desc: ATTR_STR[:organization]
       def create(name)
         params = {
           organization: options[:organization],
@@ -40,8 +42,8 @@ module TerraformEnterprise
         render client.workspaces.create(params), except:[:permissions, :actions, :environment]
       end
 
-      desc 'get <name>', 'Gets the workspace details'
-      option :organization, required: true, type: :string, desc: 'Organization name'
+      desc 'get <name>', CMD_STR[:get]
+      option :organization, required: true, type: :string, desc: ATTR_STR[:organization]
       def get(name)
         params = {
           organization: options[:organization],
@@ -50,8 +52,8 @@ module TerraformEnterprise
         render client.workspaces.get(params), except:[:permissions, :actions, :environment]
       end
 
-      desc 'delete <name>', 'Deletes the workspace'
-      option :organization, required: true, type: :string, desc: 'Organization name'
+      desc 'delete <name>', CMD_STR[:delete]
+      option :organization, required: true, type: :string, desc: ATTR_STR[:organization]
       def delete(name)
         params = {
           organization: options[:organization],
@@ -60,23 +62,23 @@ module TerraformEnterprise
         render client.workspaces.delete(params), except:[:permissions, :actions, :environment]
       end
 
-      desc 'update <name>', 'Update the workspace'
-      option :working_directory, type: :string, desc: "Relative path that Terraform will execute within."
-      option :terraform_version, type: :string, desc: "Version of Terraform to use for this workspace."
-      option :auto_apply, type: :boolean, desc: 'Auto-apply enabled'
-      option :organization, required: true, type: :string, desc: 'Organization name'
+      desc 'update <name>', CMD_STR[:update]
+      option :working_directory, type: :string, desc: ATTR_STR[:working_directory]
+      option :terraform_version, type: :string, desc: ATTR_STR[:terraform_version]
+      option :auto_apply, type: :boolean, desc: ATTR_STR[:auto_apply]
+      option :organization, required: true, type: :string, desc: ATTR_STR[:organization]
       def update(name)
         params = options
         params[:workspace] = name
         render client.workspaces.update(params), except:[:permissions, :actions, :environment]
       end
 
-      desc 'lock <id>', "Locks the workspace"
+      desc 'lock <id>', CMD_STR[:lock]
       def lock(id)
         render client.workspaces.action(action: :lock, id: id), except:[:permissions, :actions, :environment]
       end
 
-      desc 'unlock <id>', 'Unlocks the workspace'
+      desc 'unlock <id>', CMD_STR[:unlock]
       def unlock(id)
         render client.workspaces.action(action: :unlock, id: id), except:[:permissions, :actions, :environment]
       end

@@ -2,6 +2,7 @@ require 'json'
 
 require 'terraform-enterprise-client'
 require 'terraform-enterprise/commands/formatter'
+require 'terraform-enterprise/commands/strings'
 
 module TerraformEnterprise
   module Commands
