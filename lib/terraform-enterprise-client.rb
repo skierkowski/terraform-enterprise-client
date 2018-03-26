@@ -27,6 +27,7 @@ module TerraformEnterprise
       TerraformEnterprise::API::Teams.new(@request)
     end
 
+    def workspaces
       TerraformEnterprise::API::Workspaces.new(@request)
     end
   end
