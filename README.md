@@ -61,6 +61,8 @@ The number of supported resources is a subset of the resources exposed via the T
 - `Client#workspaces`
 - `Client#organizations`
 - `Client#oauth_tokens`
+- `Client#variables`
+- `Client#teams`
 
 ## Command Line Tool
 
@@ -95,3 +97,23 @@ The CLI is designed to be easy to call from other scripts. A few command line op
 - `--all` (Boolean, default: false): By default most commands only return a subset of fields. Many of the APIs return additional attributes which are used by the UI and likely have little value to you. As such, they are excluded by default. This option will return all of the fields, not just the subset.
 - `--value` (Boolean, default: false): The output text by default shows the key and values for each field. If this option is enabled only the value of the fields will be returned. This is particularly useful if you would like to obtain the id of a newly created resource (e.g. `tfe workspcaces create new-ws --organization my-organization --only name --value` would return only the name of the created workspace)
 - `--no-table` (Boolean, default: false): For `list` subcommands format the output as a list of key/value paris instead of formatting the list in a table. 
+
+### Contribution
+
+Contribution to the CLI is welcome. Opening issues and pull requests is welcome and will be reviewed.
+
+#### Run locally
+
+To run the command line binary locally, use `bundle exec` to execute it with the context of the dependent gems.
+
+```
+bundle exec ./bin/tfe
+```
+#### Command line design
+
+Basic design principles of the command line interface:
+
+- General commands are `tfe <resource> <action>`
+- Required attributes should be set as parameters (e.g. `tfe workspaces create <name> <email>`
+- Optional attributes should be set as optios
+- Relationship context on resources should be set as options (e.g. `tfe variables list --organization <org> --workspace <workspace`
