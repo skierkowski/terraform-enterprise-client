@@ -113,7 +113,7 @@ bundle exec ./bin/tfe
 
 Basic design principles of the command line interface:
 
-- General commands are `tfe <resource> <action>`
+- Resource-specific commands should be `tfe <resource> <action>`
 - Required attributes should be set as parameters (e.g. `tfe workspaces create <name> <email>`
-- Optional attributes should be set as optios
-- Relationship context on resources should be set as options (e.g. `tfe variables list --organization <org> --workspace <workspace`
+- Optional attributes should be set as options
+- Relationships (member-of, belongs-to) on resources should be set as options (e.g. `tfe variables list --organization <org> --workspace <workspace>`
