@@ -5,9 +5,10 @@ module TerraformEnterprise
     class Request
       attr_accessor :base
 
-      def initialize(api_key:, host: 'https://app.terraform.io/api/v2')
+      def initialize(api_key:, host: 'https://app.terraform.io/api/v2', debug: false)
         @base    = host
         @api_key = api_key
+        @debug   = debug
         @headers = {
           'Authorization' => "Bearer #{@api_key}",
           'Content-Type' => 'application/vnd.api+json'
@@ -53,11 +54,16 @@ module TerraformEnterprise
           end
         end
 
+        puts "[DEBUG] #{request}" if @debug
+        puts "[DEBUG] [PAYLOAD] #{data}" if @debug
+
         response = begin
           RestClient::Request.execute(request)
         rescue RestClient::ExceptionWithResponse => ex
           ex.response
         end
+
+        puts "[DEBUG] [RESPONSE (#{response.code})] #{response}" if @debug
 
         TerraformEnterprise::API::Response.new(response)
       end

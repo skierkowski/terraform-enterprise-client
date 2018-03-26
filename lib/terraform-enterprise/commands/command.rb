@@ -14,6 +14,7 @@ module TerraformEnterprise
       class_option :only, type: :array, desc: 'List of fields that should be displayed'
       class_option :all, type: :boolean, default: false, desc: "Return all fields, not just summary"
       class_option :value, type: :boolean, default: false, desc: 'Only return the value; i.e. do not show keys'
+      class_option :debug, type: :boolean, default: false, desc: 'Show debug logs'
 
       no_commands do
         def render(obj, default_options={})
@@ -29,6 +30,7 @@ module TerraformEnterprise
           settings           = { }
           settings[:api_key] = options[:token] || ENV['TERRAFORM_ENTERPRISE_TOKEN']
           settings[:host]    = options[:host] if options[:host]
+          settings[:debug]   = options[:debug] if options[:debug]
           TerraformEnterprise::Client.new(settings)
         end
 
