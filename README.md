@@ -61,6 +61,8 @@ The number of supported resources is a subset of the resources exposed via the T
 - `Client#workspaces`
 - `Client#organizations`
 - `Client#oauth_tokens`
+- `Client#variables`
+- `Client#teams`
 
 ## Command Line Tool
 
