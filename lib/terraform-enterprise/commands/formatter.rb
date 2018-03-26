@@ -20,7 +20,11 @@ module TerraformEnterprise
             end
           elsif obj.has_errors?
             obj.errors.each do |error|
-              puts "Error (#{error['status']}): #{error['title']}".red
+              if error['status'] && error['title']
+                puts "Error (#{error['status']}): #{error['title']}".red
+              else
+                puts "Error (#{obj.code}): #{error}".red
+              end
             end
           else
             puts "Unknown server response (#{obj.code})".yellow
