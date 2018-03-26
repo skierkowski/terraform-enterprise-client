@@ -55,7 +55,25 @@ module TerraformEnterprise
         attributes: {
           organization: 'Organization to which this OAuth Token belongs to.'
         }
-      }
+      },
+      variables: {
+        commands: {
+          create: 'Create a new variable',
+          delete: 'Delete the variable by ID',
+          get: 'Get variable details',
+          list: 'List variables in organization',
+          update: 'Update a variable by ID',
+        },
+        attributes: {
+          organization: 'Organization to which this Variable belongs to.',
+          workspace: 'Workspace to which this Variable belongs to.',
+          category: 'The type of cateogry, probably "terrafomr" or "environment"',
+          hcl: 'Variable should be parsed using HCL',
+          sensitive:'Variable should be marked as sensitive',
+          value: 'Variable value',
+          key: 'Variable key',
+        }
+      },
     }
   end
 end

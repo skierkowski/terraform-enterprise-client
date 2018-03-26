@@ -6,6 +6,7 @@ require 'terraform-enterprise/resource_requests/organizations'
 require 'terraform-enterprise/resource_requests/oauth-tokens'
 require 'terraform-enterprise/resource_requests/workspaces'
 require 'terraform-enterprise/resource_requests/teams'
+require 'terraform-enterprise/resource_requests/variables'
 
 module TerraformEnterprise
   class Client
@@ -25,6 +26,10 @@ module TerraformEnterprise
 
     def teams
       TerraformEnterprise::API::Teams.new(@request)
+    end
+
+    def variables
+      TerraformEnterprise::API::Variables.new(@request)
     end
 
     def workspaces
