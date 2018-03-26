@@ -37,6 +37,17 @@ module TerraformEnterprise
         },
         attributes: { }
       },
+      teams: {
+        commands: {
+          create: 'Create a new team',
+          delete: 'Delete the team by ID',
+          list: 'List teams in organization',
+          get: 'Get team details'
+        },
+        attributes: {
+          organization: 'Organization to which this Team belongs to.'
+        }
+      },
       oauth_tokens: {
         commands: {
           list: 'List the OAuth tokens in the organization'
