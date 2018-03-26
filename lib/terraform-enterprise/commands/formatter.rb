@@ -25,14 +25,17 @@ module TerraformEnterprise
               else
                 puts "Error (#{obj.code}): #{error}".red
               end
+              exit(false)
             end
           else
             puts "Unknown server response (#{obj.code})".yellow
             puts obj.body
+            exit(false)
           end
         else
           puts "Unknown content".yellow
           puts obj
+          exit(false)
         end
       end
 
