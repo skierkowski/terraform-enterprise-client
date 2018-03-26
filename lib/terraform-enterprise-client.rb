@@ -2,9 +2,9 @@ require 'json'
 require 'rest-client'
 
 require 'terraform-enterprise/client/request'
-require 'terraform-enterprise/resources/organizations'
-require 'terraform-enterprise/resources/oauth-tokens'
-require 'terraform-enterprise/resources/workspaces'
+require 'terraform-enterprise/resource_requests/organizations'
+require 'terraform-enterprise/resource_requests/oauth-tokens'
+require 'terraform-enterprise/resource_requests/workspaces'
 
 module TerraformEnterprise
   class Client
@@ -15,15 +15,15 @@ module TerraformEnterprise
     end
 
     def workspaces
-      TerraformEnterprise::Workspaces.new(@request)
+      TerraformEnterprise::API::Workspaces.new(@request)
     end
 
     def organizations
-      TerraformEnterprise::Organizations.new(@request)
+      TerraformEnterprise::API::Organizations.new(@request)
     end
 
     def oauth_tokens
-      TerraformEnterprise::OAuthTokens.new(@request)
+      TerraformEnterprise::API::OAuthTokens.new(@request)
     end
   end
 end
