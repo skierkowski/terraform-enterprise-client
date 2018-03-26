@@ -28,12 +28,12 @@ module TerraformEnterprise
           name: name,
           'working-directory' => options[:working_directory] || '',
         }
-        if options[:branch] || options[:repo] || options[:oauth_token] || options[:ingress_submodules]
+        if options[:repo] && options[:oauth_token]
           repo = {}
-          repo['branch']             = options[:branch] if options[:branch]
-          repo['identifier']         = options[:repo] if options[:repo]
-          repo['oauth-token-id']     = options[:oauth_token] if options[:oauth_token]
-          repo['ingress-submodules'] = options[:ingress_submodules] if options[:ingress_submodules]
+          repo['branch']             = options[:branch] || ''
+          repo['identifier']         = options[:repo]
+          repo['oauth-token-id']     = options[:oauth_token]
+          repo['ingress-submodules'] = options[:ingress_submodules] || false
           params['vcs-repo'] = repo
         end
 
