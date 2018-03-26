@@ -3,12 +3,11 @@ require 'terraform-enterprise/commands/command'
 module TerraformEnterprise
   module Commands
     class OrganizationsCommand < TerraformEnterprise::Commands::Command
-      class_option :host, type: :string
-      class_option :token, type: :string
 
       desc 'list', 'Lists all organizations'
+      option :table, type: :boolean, default: true, desc: 'Format output in a table'
       def list
-        render client.organizations.list
+        render client.organizations.list, only: [:id, :name, 'created-at', :email]
       end
 
       desc 'create <name> <email>', 'Creates a new organization'

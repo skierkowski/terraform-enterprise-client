@@ -4,11 +4,10 @@ require 'terraform-enterprise-client'
 module TerraformEnterprise
   module Commands
     class OAuthTokensCommand < TerraformEnterprise::Commands::Command
-      class_option :host, type: :string
-      class_option :token, type: :string
       class_option :organization, required: true, type: :string, desc: 'Organization name'
 
       desc 'list', 'Lists all OAuth Tokens'
+      option :table, type: :boolean, default: true, desc: 'Format output in a table'
       def list
         render client.oauth_tokens.list(options)
       end
