@@ -9,6 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage              = 'http://github.com/skierkowski/terraform-enterprise-client'
   gem.summary               = 'Ruby client for the official Terraform Enterprise API'
   gem.description           = %q{ Ruby client that supports all of the Terraform Enterprise API methods. }
+  gem.license               = 'MPL-2.0'
   gem.version               = TerraformEnterprise::VERSION
   gem.required_ruby_version = '>= 2.0.0'  
   gem.files                 = Dir['{lib}/**/*']
@@ -16,8 +17,8 @@ Gem::Specification.new do |gem|
   gem.require_paths         = %w[ lib ]
   gem.extra_rdoc_files      = ['LICENSE', 'README.md']
 
-  gem.add_dependency 'rest-client', '~> 2.0.2'
-  gem.add_dependency 'colorize', '~> 0.8.1'
-  gem.add_dependency 'thor', '~> 0.20.0'
-  gem.add_dependency 'terminal-table', '~> 1.8.0'
+  gem.add_dependency 'rest-client', '~> 2.0', '>= 2.0.2'
+  gem.add_dependency 'colorize', '~> 0.8', '>= 0.8.1'
+  gem.add_dependency 'thor', '~> 0.20', '>= 0.20.0'
+  gem.add_dependency 'terminal-table', '~> 1.8', '>= 1.8.0'
 end
