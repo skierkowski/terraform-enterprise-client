@@ -54,16 +54,19 @@ module TerraformEnterprise
           end
         end
 
-        puts "[DEBUG] #{request}" if @debug
-        puts "[DEBUG] [PAYLOAD] #{data}" if @debug
-
         response = begin
           RestClient::Request.execute(request)
         rescue RestClient::ExceptionWithResponse => ex
           ex.response
         end
 
-        puts "[DEBUG] [RESPONSE (#{response.code})] #{response}" if @debug
+        if @debug
+          puts "[DEBUG] [REQUEST:METHOD]  #{request[:method].to_s.upcase} #{request[:url]}"
+          puts "[DEBUG] [REQUEST:HEADERS] #{request[:headers]}"
+          puts "[DEBUG] [REQUEST:PAYLOAD] #{data}"
+          puts "[DEBUG] [RESPONSE:CODE]   #{response.code}" 
+          puts "[DEBUG] [RESPONSE:BODY]   #{response.body}" 
+        end
 
         TerraformEnterprise::API::Response.new(response)
       end
