@@ -1,6 +1,11 @@
 # Terraform Enterprise API Client & Command Line Tool
 A simple Ruby API client library and command line tool for the [Terraform Enterprise API](https://www.terraform.io/docs/enterprise/api/index.html).
 
+[![Gem Version](https://badge.fury.io/rb/terraform-enterprise-client.svg)](https://badge.fury.io/rb/terraform-enterprise-client)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1fd90e8dda31d1d402e8/maintainability)](https://codeclimate.com/github/skierkowski/terraform-enterprise-client/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1fd90e8dda31d1d402e8/test_coverage)](https://codeclimate.com/github/skierkowski/terraform-enterprise-client/test_coverage)
+[![Dependency Status](https://gemnasium.com/badges/github.com/skierkowski/terraform-enterprise-client.svg)](https://gemnasium.com/github.com/skierkowski/terraform-enterprise-client)
+[![Inline docs](http://inch-ci.org/github/skierkowski/terraform-enterprise-client.svg?branch=master)](http://inch-ci.org/github/skierkowski/terraform-enterprise-client)
 
 
 ## Requirements
@@ -113,7 +118,7 @@ bundle exec ./bin/tfe
 
 Basic design principles of the command line interface:
 
-- General commands are `tfe <resource> <action>`
+- Resource-specific commands should be `tfe <resource> <action>`
 - Required attributes should be set as parameters (e.g. `tfe workspaces create <name> <email>`
-- Optional attributes should be set as optios
-- Relationship context on resources should be set as options (e.g. `tfe variables list --organization <org> --workspace <workspace`
+- Optional attributes should be set as options
+- Relationships (member-of, belongs-to) on resources should be set as options (e.g. `tfe variables list --organization <org> --workspace <workspace>`
