@@ -5,6 +5,7 @@ module TerraformEnterprise
     STRINGS = {
       options: {
         table: 'Format list output as a table'
+        token: 'Set the auth token, defaults to TFE_TOKEN environment variable',
       },
       workspaces: {
         attributes: {

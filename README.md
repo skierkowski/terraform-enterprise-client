@@ -27,7 +27,7 @@ This gem depends on these other gems for usage at runtime:
 ```ruby
 require 'terraform-enterprise-client'
 
-api_key = ENV['TERRAFORM_ENTERPRISE_TOKEN']
+api_key = ENV['TFE_TOKEN']
 client = TerraformEnterprise::Client.new(api_key: api_key)
 
 # Create a new organization
@@ -85,7 +85,7 @@ Commands:
 
 ### Authentication
 
-There are two methods for authenticating the CLI with the Terraform Enterprise API. The first is to use the `TERRAFORM_ENTERPRISE_TOKEN` environment variable. The second is to pass in the token on the command line using the `--token` option. The command line option takes precendence over the environment variable.
+There are two methods for authenticating the CLI with the Terraform Enterprise API. The first is to use the `TFE_TOKEN` environment variable. The second is to pass in the token on the command line using the `--token` option. The command line option takes precendence over the environment variable.
 
 ### Scripting
 
