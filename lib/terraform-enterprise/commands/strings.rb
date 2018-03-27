@@ -4,20 +4,31 @@ module TerraformEnterprise
   module Commands
     STRINGS = {
       options: {
-        table: 'Format list output as a table'
+        table: 'Format list output as a table',
+        host: 'Set host address for private Terraform Enterprise',
         token: 'Set the auth token, defaults to TFE_TOKEN environment variable',
+        color: 'If disabled the ANSI color codes will not be used',
+        except: 'List of fields that should not be displayed',
+        only: 'List of fields that should be displayed',
+        all: 'Return all fields, not just summary',
+        value: 'Only return the value; i.e. do not show keys',
+        debug: 'Show debug logs'
       },
       workspaces: {
         attributes: {
           terraform_version: 'Version of Terraform to use for this workspace.',
-          working_directory: 'Relative path that Terraform will execute within.',
-          oauth_token: 'VCS Connection (OAuth Conection + Token) to use as identified; obtained from the oauth_tokens subcommand.',
+          working_directory: 'Relative path that Terraform will execute
+            within.',
+          oauth_token: 'VCS Connection (OAuth Conection + Token) to use as
+            identified; obtained from the oauth_tokens subcommand.',
           branch: 'Repository branch that Terraform will execute from.',
-          ingress_submodules: 'Submodules should be fetched when cloning the VCS repository.',
+          ingress_submodules: 'Submodules should be fetched when cloning the VCS
+            repository.',
           repo: 'Reference to VCS repository in the format :org/:repo.',
-          import_legacy: 'Specifies the legacy Environment to use as the source of the migration/',
+          import_legacy: 'Specifies the legacy Environment to use as the source
+            of the migration/',
           organization: 'Organization to which this workspaces belongs to.',
-          auto_apply: 'Auto-apply enabled',
+          auto_apply: 'Auto-apply enabled'
         },
         commands: {
           create: 'Create a new workspace',
@@ -34,9 +45,9 @@ module TerraformEnterprise
           create: 'Create a new organization',
           list: 'List all the organizations',
           get: 'Get organization details by name',
-          delete: 'Delete the organization',
+          delete: 'Delete the organization'
         },
-        attributes: { }
+        attributes: {}
       },
       teams: {
         commands: {
@@ -63,18 +74,19 @@ module TerraformEnterprise
           delete: 'Delete the variable by ID',
           get: 'Get variable details',
           list: 'List variables in organization',
-          update: 'Update a variable by ID',
+          update: 'Update a variable by ID'
         },
         attributes: {
           organization: 'Organization to which this Variable belongs to.',
           workspace: 'Workspace to which this Variable belongs to.',
-          category: 'The type of cateogry, probably "terrafomr" or "environment"',
+          category: 'The type of category, probably "terraform" or
+            "environment"',
           hcl: 'Variable should be parsed using HCL',
-          sensitive:'Variable should be marked as sensitive',
+          sensitive: 'Variable should be marked as sensitive',
           value: 'Variable value',
-          key: 'Variable key',
+          key: 'Variable key'
         }
-      },
-    }
+      }
+    }.freeze
   end
 end

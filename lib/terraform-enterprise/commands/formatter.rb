@@ -18,7 +18,7 @@ module TerraformEnterprise
             else
               puts "Success (#{obj.code})".green
             end
-          elsif obj.has_errors?
+          elsif obj.errors?
             obj.errors.each do |error|
               if error['status'] && error['title']
                 puts "Error (#{error['status']}): #{error['title']}".red

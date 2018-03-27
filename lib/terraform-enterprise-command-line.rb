@@ -9,20 +9,22 @@ require 'terraform-enterprise/commands/variables_command'
 
 module TerraformEnterprise
   class CommandLine < Thor
+    include TerraformEnterprise::Commands
+
     desc 'organizations <subcommand>', 'Manage organizations'
-    subcommand 'organizations', TerraformEnterprise::Commands::OrganizationsCommand
+    subcommand 'organizations', OrganizationsCommand
 
     desc 'workspaces <subcommand>', 'Manage workspaces'
-    subcommand 'workspaces', TerraformEnterprise::Commands::WorkspacesCommand
+    subcommand 'workspaces', WorkspacesCommand
 
     desc 'oauth_tokens <subcommand>', 'Manage OAuth tokens'
-    subcommand 'oauth_tokens', TerraformEnterprise::Commands::OAuthTokensCommand
+    subcommand 'oauth_tokens', OAuthTokensCommand
 
     desc 'teams <subcommand>', 'Manage teams'
-    subcommand 'teams', TerraformEnterprise::Commands::TeamsCommand
+    subcommand 'teams', TeamsCommand
 
     desc 'variables <subcommand>', 'Manage variables'
-    subcommand 'variables', TerraformEnterprise::Commands::VariablesCommand
+    subcommand 'variables', VariablesCommand
   end
 end
 

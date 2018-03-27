@@ -12,7 +12,7 @@ module TerraformEnterprise
   class Client
     attr_accessor :base
 
-    def initialize(options={})
+    def initialize(options = {})
       @request = TerraformEnterprise::API::Request.new(options)
     end
 

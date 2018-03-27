@@ -2,26 +2,24 @@ require 'terraform-enterprise/client/resource'
 
 module TerraformEnterprise
   module API
+    # Wrapps the JSON-API HTTP response for easy access to data and resources
     class Response
+      include TerraformEnterprise::API
+
       attr_reader :code, :body, :data, :resource, :resources, :errors
       def initialize(rest_client_response)
         @code = rest_client_response.code
         @body = parse(rest_client_response.body)
         @data = (@body.is_a?(Hash) && @body['data']) ? @body['data'] : @body
-        if @data.is_a?(Hash)
-          @resource = TerraformEnterprise::API::Resource.new(@data) 
+
+        @resource = Resource.new(@data) if @data.is_a?(Hash)
+        if @data.is_a?(Array) && @data.all? { |a| a.is_a?(Hash) }
+          @resources = @data.map { |item| Resource.new(item) }
         end
-        if @data.is_a?(Array) && @data.all?{|a| a.is_a?(Hash)}
-          @resources = @data.map do |item|
-            TerraformEnterprise::API::Resource.new(item)
-          end
-        end
-        if has_errors?
-          @errors = @body['errors']
-        end
+        @errors = @body['errors'] if errors?
       end
 
-      def has_errors?
+      def errors?
         @body.is_a?(Hash) && @body['errors'] && @body['errors'].is_a?(Array)
       end
 
