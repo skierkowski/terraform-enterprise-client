@@ -9,6 +9,7 @@ require 'terraform-enterprise/resource_requests/teams'
 require 'terraform-enterprise/resource_requests/variables'
 
 module TerraformEnterprise
+  # The Terraform Enterprise Client class
   class Client
     attr_accessor :base
 

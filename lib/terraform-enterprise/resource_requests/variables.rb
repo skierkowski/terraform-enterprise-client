@@ -1,46 +1,46 @@
-require "terraform-enterprise/client/resource_request"
+require 'terraform-enterprise/client/resource_request'
 
-module TerraformEnterprise  
+module TerraformEnterprise
   module API
+    # Variables resource request
     class Variables < TerraformEnterprise::API::ResourceRequest
-      
-      def list(params={})
+      def list(params = {})
         filter = {}
-        filter[:workspace] = {name: params[:workspace]} if params[:workspace]
-        filter[:organization] = {name: params[:organization]} if params[:organization]
-        @request.get(:vars, {filter:filter})
+        filter[:workspace] = { name: params[:workspace] } if params[:workspace]
+        filter[:organization] = { name: params[:organization] } if params[:organization]
+        @request.get(:vars, filter: filter)
       end
 
-      def get(params={})
+      def get(params = {})
         @request.get(:vars, params[:id])
       end
 
-      def create(params={})
-        org = params.delete(:organization)
+      def create(params = {})
+        org       = params.delete(:organization)
         workspace = params.delete(:workspace)
-        data = {
+        data      = {
           attributes: params,
-          type: 'vars',
+          type: 'vars'
         }
         filter = {
-          organization: {name: org},
-          workspace: {name: workspace}
+          organization: { name: org },
+          workspace: { name: workspace }
         }
 
-        @request.post(:vars, {data: data, filter: filter})
+        @request.post(:vars, data: data, filter: filter)
       end
 
-      def update(params={})
+      def update(params = {})
         id = params.delete(:id)
         data = {
           attributes: params,
-          type: 'vars',
+          type: 'vars'
         }
 
         @request.patch(:vars, id, data: data)
       end
 
-      def delete(params={})
+      def delete(params = {})
         @request.delete(:vars, params[:id])
       end
     end

@@ -1,17 +1,18 @@
-require "terraform-enterprise/client/resource_request"
+require 'terraform-enterprise/client/resource_request'
 
-module TerraformEnterprise  
+module TerraformEnterprise
   module API
+    # Organization resource request
     class Organizations < TerraformEnterprise::API::ResourceRequest
-      def list(params={})
+      def list
         @request.get(:organizations)
       end
 
-      def get(params={})
+      def get(params = {})
         @request.get(:organizations, params[:name])
       end
 
-      def create(params={})
+      def create(params = {})
         data = {
           attributes: params,
           type: 'organizations'
@@ -20,7 +21,7 @@ module TerraformEnterprise
         @request.post(:organizations, data: data)
       end
 
-      def delete(params={})
+      def delete(params = {})
         @request.delete(:organizations, params[:name])
       end
     end

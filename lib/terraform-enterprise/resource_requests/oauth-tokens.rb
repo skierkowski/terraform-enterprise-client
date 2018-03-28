@@ -1,9 +1,10 @@
-require "terraform-enterprise/client/resource_request"
+require 'terraform-enterprise/client/resource_request'
 
-module TerraformEnterprise  
+module TerraformEnterprise
   module API
+    # OAuth Token resource request
     class OAuthTokens < TerraformEnterprise::API::ResourceRequest
-      def list(params={})
+      def list(params = {})
         @request.get(:organizations, params[:organization], 'oauth-tokens')
       end
     end

@@ -8,6 +8,7 @@ require 'terraform-enterprise/commands/teams_command'
 require 'terraform-enterprise/commands/variables_command'
 
 module TerraformEnterprise
+  # Terraform Enterprise Command Line class
   class CommandLine < Thor
     include TerraformEnterprise::Commands
 

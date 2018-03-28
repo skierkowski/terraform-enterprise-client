@@ -1,17 +1,20 @@
-require "terraform-enterprise/client/resource_request"
+require 'terraform-enterprise/client/resource_request'
 
-module TerraformEnterprise  
+module TerraformEnterprise
   module API
+    # Workspace resource request
     class Workspaces < TerraformEnterprise::API::ResourceRequest
-      def list(params={})
+      def list(params = {})
         @request.get(:organizations, params[:organization], :workspaces)
       end
 
-      def get(params={})
-        @request.get(:organizations, params[:organization], :workspaces, params[:workspace])
+      def get(params = {})
+        organization = params[:organization]
+        workspace    = params[:workspace]
+        @request.get(:organizations, organization, :workspaces, workspace)
       end
 
-      def create(params={})
+      def create(params = {})
         org = params.delete(:organization)
         data = {
           attributes: params,
@@ -21,7 +24,7 @@ module TerraformEnterprise
         @request.post(:organizations, org, :workspaces, data: data)
       end
 
-      def update(params={})
+      def update(params = {})
         org = params.delete(:organization)
         id  = params.delete(:workspace)
 
@@ -33,12 +36,16 @@ module TerraformEnterprise
         @request.patch(:organizations, org, :workspaces, id, data: data)
       end
 
-      def delete(params={})
-        @request.delete(:organizations, params[:organization], :workspaces, params[:workspace])
+      def delete(params = {})
+        organization = params[:organization]
+        workspace    = params[:workspace]
+        @request.delete(:organizations, organization, :workspaces, workspace)
       end
 
-      def action(params={})
-        @request.post(:workspaces, params[:id], :actions, params[:action].to_sym)
+      def action(params = {})
+        id     = params[:id]
+        action = params[:action].to_sym
+        @request.post(:workspaces, id, :actions, action)
       end
     end
   end

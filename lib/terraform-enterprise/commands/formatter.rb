@@ -6,15 +6,16 @@ require 'terraform-enterprise-client'
 
 module TerraformEnterprise
   module Commands
-    module Formatter
-      def self.render(obj, options={})
+    # Module with render method to render the Resource object
+    class Formatter
+      def self.render(obj, options = {})
         String.disable_colorization = !options[:color]
         if obj.is_a?(TerraformEnterprise::API::Response)
           if obj.code >= 200 && obj.code < 300
             if obj.resources
               puts render_resource_table(obj.resources, options)
             elsif obj.resource
-              puts render_resource(obj.resource, options) 
+              puts render_resource(obj.resource, options)
             else
               puts "Success (#{obj.code})".green
             end
@@ -33,28 +34,33 @@ module TerraformEnterprise
             exit(false)
           end
         else
-          puts "Unknown content".yellow
+          puts 'Unknown content'.yellow
           puts obj
           exit(false)
         end
       end
 
-      private
-
-      def self.parse_resource(resource, options)
+      private_class_method def self.parse_resource(resource, options)
         parsed_resource = flatten_dotted_hash(resource.attributes)
-        parsed_resource = {'id' => resource.id}.merge(parsed_resource) if resource.id
-        (options[:except] || []).each do |excluded|
-          parsed_resource.delete_if {|key,value| key.to_s.start_with?(excluded.to_s) }
+        if resource.id
+          parsed_resource = { 'id' => resource.id }.merge(parsed_resource)
         end
-        if options[:only] && options[:only].length > 0
-          parsed_resource.select! do |key, value|
-            options[:only].any?{ |included| key.to_s.start_with?(included.to_s) }
+        (options[:except] || []).each do |excluded|
+          parsed_resource.delete_if do |key, _|
+            key.to_s.start_with?(excluded.to_s)
+          end
+        end
+        if options[:only] && !options[:only].empty?
+          parsed_resource.select! do |key, _|
+            options[:only].any? do |included|
+              key.to_s.start_with?(included.to_s)
+            end
           end
         end
         parsed_resource
       end
 
+      private_class_method
       def self.render_resource(resource, options)
         parsed_resource = parse_resource(resource, options)
         parsed_resource.keys.map do |key|
@@ -63,30 +69,49 @@ module TerraformEnterprise
         end.join("\n")
       end
 
+      private_class_method
       def self.render_resource_table(resources, options)
         if options[:table] && !options[:value]
-          parsed_resources = resources.map{|resource| parse_resource(resource,options)}
-          keys = parsed_resources.map{|resource| resource.keys }.flatten.uniq
+          parsed_resources = resources.map do |resource|
+            parse_resource(resource, options)
+          end
+          keys = parsed_resources.map(&:keys).flatten.uniq
           rows = parsed_resources.map do |resource|
-            keys.map{|key| resource[key]}
+            keys.map { |key| resource[key] }
           end
           table = Terminal::Table.new headings: keys, rows: rows
           table
         else
-          out = resources.map{|resource| render_resource(resource, options)}.join("\n#{'-' * 10}\n")
+          line_separator = "\n#{'-' * 10}\n"
+          out = resources.map do |resource|
+            render_resource(resource, options)
+          end
+          out.join(line_separator)
         end
       end
 
-      def self.flatten_hash(h,f=[],g={})
-        return g.update({ f=>h }) unless h.is_a?(Hash) || h.is_a?(Array)
-        h.each { |k,r| flatten_hash(r,f+[k],g) } if h.is_a?(Hash)
-        h.each_with_index { |r, k| flatten_hash(r,f+[k],g) } if h.is_a?(Array)
-        g
+      private_class_method
+      def self.flatten_hash(hash, new_key = [], new_hash = {})
+        if hash.is_a?(Array)
+          hash.each_with_index do |item, obj|
+            flatten_hash(item, new_key + [obj], new_hash)
+          end
+        elsif hash.is_a?(Hash)
+          hash.each do |key, value|
+            flatten_hash(value, new_key + [key], new_hash)
+          end
+        else
+          return new_hash.update(new_key => hash)
+        end
+        new_hash
       end
 
+      private_class_method
       def self.flatten_dotted_hash(source)
         flat = flatten_hash(source)
-        flat.keys.each_with_object({}) { |key, h| h[key.join('.')] = flat[key] }  
+        flat.keys.each_with_object({}) do |key, h|
+          h[key.join('.')] = flat[key]
+        end
       end
     end
   end
