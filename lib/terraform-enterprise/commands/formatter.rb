@@ -10,37 +10,50 @@ module TerraformEnterprise
     class Formatter
       def self.render(obj, options = {})
         String.disable_colorization = !options[:color]
-        if obj.is_a?(TerraformEnterprise::API::Response)
-          if obj.code >= 200 && obj.code < 300
-            if obj.resources
-              puts render_resource_table(obj.resources, options)
-            elsif obj.resource
-              puts render_resource(obj.resource, options)
-            else
-              puts "Success (#{obj.code})".green
-            end
-          elsif obj.errors?
-            obj.errors.each do |error|
-              if error['status'] && error['title']
-                puts "Error (#{error['status']}): #{error['title']}".red
-              else
-                puts "Error (#{obj.code}): #{error}".red
-              end
-              exit(false)
-            end
-          else
-            puts "Unknown server response (#{obj.code})".yellow
-            puts obj.body
-            exit(false)
-          end
+
+        if !obj.is_a?(TerraformEnterprise::API::Response)
+          unkown_response(obj)
+        elsif obj.success?
+          render_resource(obj, options)
+        elsif obj.errors?
+          render_errors(obj)
         else
-          puts 'Unknown content'.yellow
-          puts obj
-          exit(false)
+          unkown_response(obj.body)
         end
       end
 
-      private_class_method def self.parse_resource(resource, options)
+      private_class_method
+      def self.unkown_response(obj)
+        puts 'Unknown response'.yellow
+        puts obj
+        exit(false)
+      end
+
+      private_class_method
+      def self.render_resource(obj, options)
+        if obj.resources
+          puts render_resource_list(obj.resources, options)
+        elsif obj.resource
+          puts render_resource_item(obj.resource, options)
+        else
+          puts "Success (#{obj.code})".green
+        end
+      end
+
+      private_class_method
+      def self.render_errors(obj)
+        obj.errors.each do |error|
+          if error['status'] && error['title']
+            puts "Error (#{error['status']}): #{error['title']}".red
+          else
+            puts "Error (#{obj.code}): #{error}".red
+          end
+        end
+        exit(false)
+      end
+
+      private_class_method
+      def self.parse_resource(resource, options)
         parsed_resource = flatten_dotted_hash(resource.attributes)
         if resource.id
           parsed_resource = { 'id' => resource.id }.merge(parsed_resource)
@@ -61,7 +74,7 @@ module TerraformEnterprise
       end
 
       private_class_method
-      def self.render_resource(resource, options)
+      def self.render_resource_item(resource, options)
         parsed_resource = parse_resource(resource, options)
         parsed_resource.keys.map do |key|
           value = parsed_resource[key]
@@ -70,7 +83,7 @@ module TerraformEnterprise
       end
 
       private_class_method
-      def self.render_resource_table(resources, options)
+      def self.render_resource_list(resources, options)
         if options[:table] && !options[:value]
           parsed_resources = resources.map do |resource|
             parse_resource(resource, options)
@@ -84,7 +97,7 @@ module TerraformEnterprise
         else
           line_separator = "\n#{'-' * 10}\n"
           out = resources.map do |resource|
-            render_resource(resource, options)
+            render_resource_item(resource, options)
           end
           out.join(line_separator)
         end

@@ -23,6 +23,10 @@ module TerraformEnterprise
         @body.is_a?(Hash) && @body['errors'] && @body['errors'].is_a?(Array)
       end
 
+      def success?
+        @code.between?(200, 299)
+      end
+
       private
 
       def parse(str)
