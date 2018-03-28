@@ -10,13 +10,13 @@ module TerraformEnterprise
       def initialize(rest_client_response)
         @code = rest_client_response.code
         @body = parse(rest_client_response.body)
-        @data = (@body.is_a?(Hash) && @body['data']) ? @body['data'] : @body
 
-        @resource = Resource.new(@data) if @data.is_a?(Hash)
-        if @data.is_a?(Array) && @data.all? { |a| a.is_a?(Hash) }
-          @resources = @data.map { |item| Resource.new(item) }
-        end
-        @errors = @body['errors'] if errors?
+        return unless @body.is_a?(Hash)
+
+        @data      = @body['data'] || @body
+        @errors    = @body['errors'] || []
+        @resource  = Resource.new(@data) if @data.is_a?(Hash)
+        @resources = @data.map { |row| Resource.new(row) } if @data.is_a?(Array)
       end
 
       def errors?
