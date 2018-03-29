@@ -32,12 +32,25 @@ module TerraformEnterprise
         },
         commands: {
           create: 'Create a new workspace',
-          list: 'List worksapces in the organization',
+          list: 'List workspaces in the organization',
           get: 'Get workspace details by name',
           delete: 'Delete the workspace',
           update: 'Update the workspace',
           lock: 'Lock the workspace by workspace ID',
           unlock: 'Unlock the workspace by workspace ID'
+        }
+      },
+      configuration_versions: {
+        attributes: {
+          workspace_id: 'Workspace ID of the workspace to which the
+            configuration version belongs to.',
+          path: 'Path to the tar.gz file'
+        },
+        commands: {
+          create: 'Create a new configuration version',
+          list: 'List configuration versions in the organization',
+          get: 'Get configuration version details by name',
+          upload: 'Upload a file to the configuration version'
         }
       },
       organizations: {

@@ -68,6 +68,7 @@ The number of supported resources is a subset of the resources exposed via the T
 - `Client#oauth_tokens`
 - `Client#variables`
 - `Client#teams`
+- `Client#configuration_versions`
 
 ## Command Line Tool
 
@@ -82,10 +83,13 @@ All of the resources, actions and paraeters are documented in the tool and avail
 ```shell
 ➭ tfe help
 Commands:
-  tfe help [COMMAND]              # Describe available commands or one specific command
-  tfe oauth_tokens <subcommand>   # Manage OAuth tokens
-  tfe organizations <subcommand>  # Manage organizations
-  tfe workspaces <subcommand>     # Manage workspaces
+  tfe configuration_versions <subcommand>  # Manage configuration versions
+  tfe help [COMMAND]                       # Describe available commands or one specific command
+  tfe oauth_tokens <subcommand>            # Manage OAuth tokens
+  tfe organizations <subcommand>           # Manage organizations
+  tfe teams <subcommand>                   # Manage teams
+  tfe variables <subcommand>               # Manage variables
+  tfe workspaces <subcommand>              # Manage workspaces
 ```
 
 ### Authentication

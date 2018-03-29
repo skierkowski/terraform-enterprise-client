@@ -7,6 +7,7 @@ require 'terraform-enterprise/resource_requests/oauth-tokens'
 require 'terraform-enterprise/resource_requests/workspaces'
 require 'terraform-enterprise/resource_requests/teams'
 require 'terraform-enterprise/resource_requests/variables'
+require 'terraform-enterprise/resource_requests/configuration-versions'
 
 module TerraformEnterprise
   # The Terraform Enterprise Client class
@@ -15,6 +16,10 @@ module TerraformEnterprise
 
     def initialize(options = {})
       @request = TerraformEnterprise::API::Request.new(options)
+    end
+
+    def configuration_versions
+      TerraformEnterprise::API::ConfigurationVersions.new(@request)
     end
 
     def oauth_tokens
