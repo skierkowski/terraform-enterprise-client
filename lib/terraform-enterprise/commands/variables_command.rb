@@ -17,7 +17,7 @@ module TerraformEnterprise
       desc 'create <key> <value>', CMD_STR[:create]
       option :organization, required: true, type: :string, desc: ATTR_STR[:organization]
       option :workspace, required: true, type: :string, desc: ATTR_STR[:workspace]
-      option :category, default: 'terraform', type: :string, desc: ATTR_STR[:category]
+      option :category, default: 'terraform', type: :string, desc: ATTR_STR[:category], enum:['terraform', 'env']
       option :hcl, default: false, type: :boolean, desc: ATTR_STR[:hcl]
       option :sensitive, default: false, type: :boolean, desc: ATTR_STR[:sensitive]
       def create(key, value)
