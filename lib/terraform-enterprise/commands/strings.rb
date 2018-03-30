@@ -17,16 +17,12 @@ module TerraformEnterprise
       workspaces: {
         attributes: {
           terraform_version: 'Version of Terraform to use for this workspace.',
-          working_directory: 'Relative path that Terraform will execute
-            within.',
-          oauth_token: 'VCS Connection (OAuth Conection + Token) to use as
-            identified; obtained from the oauth_tokens subcommand.',
+          working_directory: 'Relative path that Terraform will execute within.',
+          oauth_token: 'VCS Connection (OAuth Conection + Token) to use as identified; obtained from the oauth_tokens subcommand.',
           branch: 'Repository branch that Terraform will execute from.',
-          ingress_submodules: 'Submodules should be fetched when cloning the VCS
-            repository.',
+          ingress_submodules: 'Submodules should be fetched when cloning the VCS repository.',
           repo: 'Reference to VCS repository in the format :org/:repo.',
-          import_legacy: 'Specifies the legacy Environment to use as the source
-            of the migration/',
+          import_legacy: 'Specifies the legacy Environment to use as the source of the migration/',
           organization: 'Organization to which this workspaces belongs to.',
           auto_apply: 'Auto-apply enabled'
         },
@@ -42,8 +38,7 @@ module TerraformEnterprise
       },
       configuration_versions: {
         attributes: {
-          workspace_id: 'Workspace ID of the workspace to which the
-            configuration version belongs to.',
+          workspace_id: 'Workspace ID of the workspace to which the configuration version belongs to.',
           path: 'Path to the tar.gz file'
         },
         commands: {
@@ -92,8 +87,7 @@ module TerraformEnterprise
         attributes: {
           organization: 'Organization to which this Variable belongs to.',
           workspace: 'Workspace to which this Variable belongs to.',
-          category: 'The type of category, probably "terraform" or
-            "environment"',
+          category: 'The type of category, probably "terraform" or "env"',
           hcl: 'Variable should be parsed using HCL',
           sensitive: 'Variable should be marked as sensitive',
           value: 'Variable value',
