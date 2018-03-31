@@ -97,6 +97,16 @@ module TerraformEnterprise
           comment: 'Add a comment for the action'
         }
       },
+      policy_checks: {
+        commands: {
+          list: 'List policy checks on run',
+          override: 'Override the soft-mandatory or advisory policy'
+        },
+        attributes: {
+          run_id: 'Run ID to which the policy check belongs to.',
+          comment: 'Add a comment for the action'
+        }
+      },
       oauth_tokens: {
         commands: {
           list: 'List the OAuth tokens in the organization'
