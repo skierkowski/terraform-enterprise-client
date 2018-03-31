@@ -12,7 +12,7 @@ module TerraformEnterprise
 
       desc 'list', CMD_STR[:list]
       option :table, type: :boolean, default: true, desc: STRINGS[:options][:table]
-      option :workspace_id, required: true, type: :string, desc: 'workspace id'
+      option :workspace_id, required: true, type: :string, desc: ATTR_STR[:workspace_id]
       def list
         render client.configuration_versions.list(workspace: options[:workspace_id])
       end
