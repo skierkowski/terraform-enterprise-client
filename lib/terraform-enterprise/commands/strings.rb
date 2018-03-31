@@ -82,6 +82,21 @@ module TerraformEnterprise
           name: 'Policy name'
         }
       },
+      runs: {
+        commands: {
+          create: 'Create a new run',
+          list: 'List runs in a workspace',
+          get: 'Get run details',
+          apply: 'Apply the plan',
+          discard: 'Discard the plan'
+        },
+        attributes: {
+          workspace_id: 'Workspace ID of which the run belongs to.',
+          configuration_version_id: 'Configuration Version ID of the configuration version to run',
+          destroy: 'The run should be a destroy plan',
+          comment: 'Add a comment for the action'
+        }
+      },
       oauth_tokens: {
         commands: {
           list: 'List the OAuth tokens in the organization'

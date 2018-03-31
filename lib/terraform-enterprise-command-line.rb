@@ -5,6 +5,7 @@ require 'terraform-enterprise/commands/configuration_versions_command'
 require 'terraform-enterprise/commands/oauth_tokens_command'
 require 'terraform-enterprise/commands/organizations_command'
 require 'terraform-enterprise/commands/policies_command'
+require 'terraform-enterprise/commands/runs_command'
 require 'terraform-enterprise/commands/teams_command'
 require 'terraform-enterprise/commands/variables_command'
 require 'terraform-enterprise/commands/workspaces_command'
@@ -34,6 +35,9 @@ module TerraformEnterprise
 
     desc 'policies <subcommand>', 'Manage policies'
     subcommand 'policies', PoliciesCommand
+
+    desc 'runs <subcommand>', 'Manage runs'
+    subcommand 'runs', RunsCommand
   end
 end
 
