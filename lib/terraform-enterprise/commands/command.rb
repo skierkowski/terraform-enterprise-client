@@ -33,10 +33,10 @@ module TerraformEnterprise
         end
 
         def client
-          settings           = {}
-          settings[:api_key] = options[:token] || ENV['TFE_TOKEN']
-          settings[:host]    = options[:host] if options[:host]
-          settings[:debug]   = options[:debug] if options[:debug]
+          settings         = {}
+          settings[:token] = options[:token] || ENV['TFE_TOKEN']
+          settings[:host]  = options[:host] if options[:host]
+          settings[:debug] = options[:debug] if options[:debug]
           TerraformEnterprise::Client.new(settings)
         end
 

@@ -11,10 +11,10 @@ module TerraformEnterprise
 
       def initialize(options = {})
         @base    = options[:host] || DEFAULT_HOST
-        @api_key = options[:api_key]
+        @token   = options[:token]
         @debug   = options[:debug] || DEFAULT_DEBUG
         @headers = {
-          'Authorization' => "Bearer #{@api_key}",
+          'Authorization' => "Bearer #{@token}",
           'Content-Type' => 'application/vnd.api+json'
         }
       end
@@ -36,7 +36,7 @@ module TerraformEnterprise
 
       def put(*path)
         data = path.pop if path.last.is_a?(Hash)
-        request(:put, data, data)
+        request(:put, path, data)
       end
 
       def patch(*path)
