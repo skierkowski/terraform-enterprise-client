@@ -2,11 +2,12 @@ require 'thor'
 
 require 'terraform-enterprise/version'
 require 'terraform-enterprise/commands/configuration_versions_command'
-require 'terraform-enterprise/commands/organizations_command'
-require 'terraform-enterprise/commands/workspaces_command'
 require 'terraform-enterprise/commands/oauth_tokens_command'
+require 'terraform-enterprise/commands/organizations_command'
+require 'terraform-enterprise/commands/policies_command'
 require 'terraform-enterprise/commands/teams_command'
 require 'terraform-enterprise/commands/variables_command'
+require 'terraform-enterprise/commands/workspaces_command'
 
 module TerraformEnterprise
   # Terraform Enterprise Command Line class
@@ -30,6 +31,9 @@ module TerraformEnterprise
 
     desc 'configuration_versions <subcommand>', 'Manage configuration versions'
     subcommand 'configuration_versions', ConfigurationVersionsCommand
+
+    desc 'policies <subcommand>', 'Manage policies'
+    subcommand 'policies', PoliciesCommand
   end
 end
 

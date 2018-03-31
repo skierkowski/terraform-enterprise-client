@@ -8,6 +8,7 @@ require 'terraform-enterprise/resource_requests/workspaces'
 require 'terraform-enterprise/resource_requests/teams'
 require 'terraform-enterprise/resource_requests/variables'
 require 'terraform-enterprise/resource_requests/configuration-versions'
+require 'terraform-enterprise/resource_requests/policies'
 
 module TerraformEnterprise
   # The Terraform Enterprise Client class
@@ -40,6 +41,10 @@ module TerraformEnterprise
 
     def workspaces
       TerraformEnterprise::API::Workspaces.new(@request)
+    end
+
+    def policies
+      TerraformEnterprise::API::Policies.new(@request)
     end
   end
 end

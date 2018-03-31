@@ -68,6 +68,20 @@ module TerraformEnterprise
           organization: 'Organization to which this Team belongs to.'
         }
       },
+      policies: {
+        commands: {
+          create: 'Create a new policy',
+          delete: 'Delete a policy by ID',
+          list: 'List policies in organization',
+          get: 'Get policy details',
+          upload: 'Upload a policy'
+        },
+        attributes: {
+          organization: 'Organization to which this Team belongs to.',
+          mode: 'Policy mode, hard-mandatory, soft-mandatory or advisory',
+          name: 'Policy name'
+        }
+      },
       oauth_tokens: {
         commands: {
           list: 'List the OAuth tokens in the organization'
