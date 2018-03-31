@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.description           = %q{ Ruby client that supports all of the Terraform Enterprise API methods. }
   gem.license               = 'MPL-2.0'
   gem.version               = TerraformEnterprise::VERSION
-  gem.required_ruby_version = '>= 2.0.0'  
+  gem.required_ruby_version = '>= 2.3.0'  
   gem.files                 = Dir['{lib}/**/*']
   gem.executables           = ['tfe']
   gem.require_paths         = %w[ lib ]

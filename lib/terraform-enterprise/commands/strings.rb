@@ -14,6 +14,14 @@ module TerraformEnterprise
         value: 'Only return the value; i.e. do not show keys',
         debug: 'Show debug logs'
       },
+      push: {
+        attributes: {
+          path: 'Path of directory or tar.gz file to push to the workspace'
+        },
+        commands: {
+          push: 'Pushes the configuration to the workspace'
+        }
+      },
       workspaces: {
         attributes: {
           terraform_version: 'Version of Terraform to use for this workspace.',

@@ -10,9 +10,7 @@ A simple Ruby API client library and command line tool for the [Terraform Enterp
 
 ## Requirements
 
-MRI Ruby 2.0 and newer are supported. Alternative interpreters compatible with 2.0+ should work as well.
-
-Earlier Ruby versions such as 1.8.7, 1.9.2, and 1.9.3 may work but are not supported.
+MRI Ruby 2.3 and newer are supported. Alternative interpreters compatible with 2.3+ should work as well.
 
 This gem depends on these other gems for usage at runtime:
 
