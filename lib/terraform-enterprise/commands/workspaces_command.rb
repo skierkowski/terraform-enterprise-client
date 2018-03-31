@@ -49,7 +49,7 @@ module TerraformEnterprise
           organization: options[:organization],
           workspace: name
         }
-        render client.workspaces.get(params), except:[:permissions, :actions, :environment]
+        render client.workspaces.get(params), except:[:permissions, :environment]
       end
 
       desc 'delete <name>', CMD_STR[:delete]
@@ -70,17 +70,17 @@ module TerraformEnterprise
       def update(name)
         params = options
         params[:workspace] = name
-        render client.workspaces.update(params), except:[:permissions, :actions, :environment]
+        render client.workspaces.update(params), except:[:permissions, :environment]
       end
 
       desc 'lock <id>', CMD_STR[:lock]
       def lock(id)
-        render client.workspaces.action(action: :lock, id: id), except:[:permissions, :actions, :environment]
+        render client.workspaces.action(action: :lock, id: id), except:[:permissions, :environment]
       end
 
       desc 'unlock <id>', CMD_STR[:unlock]
       def unlock(id)
-        render client.workspaces.action(action: :unlock, id: id), except:[:permissions, :actions, :environment]
+        render client.workspaces.action(action: :unlock, id: id), except:[:permissions, :environment]
       end
     end
   end
