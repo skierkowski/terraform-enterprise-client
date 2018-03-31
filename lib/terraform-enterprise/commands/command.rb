@@ -32,7 +32,14 @@ module TerraformEnterprise
             else
               symbolize_keys(default_options).merge(normalized_options)
             end
-          Formatter.render obj, calculated_options
+          formatter = Formatter.new
+          formatter.render obj, calculated_options
+        end
+
+        def error!(message)
+          formatter = Formatter.new
+          formatter.error(message)
+          exit(false)
         end
 
         def client

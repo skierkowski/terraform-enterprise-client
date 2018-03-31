@@ -1,6 +1,7 @@
 require 'thor'
 
 require 'terraform-enterprise/version'
+require 'terraform-enterprise/commands/command'
 require 'terraform-enterprise/commands/configuration_versions_command'
 require 'terraform-enterprise/commands/oauth_tokens_command'
 require 'terraform-enterprise/commands/organizations_command'
@@ -13,7 +14,7 @@ require 'terraform-enterprise/commands/workspaces_command'
 
 module TerraformEnterprise
   # Terraform Enterprise Command Line class
-  class CommandLine < Thor
+  class CommandLine < TerraformEnterprise::Commands::Command
     include TerraformEnterprise::Commands
 
     desc 'organizations <subcommand>', 'Manage organizations'
