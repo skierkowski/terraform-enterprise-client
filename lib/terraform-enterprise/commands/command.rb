@@ -3,12 +3,15 @@ require 'json'
 require 'terraform-enterprise-client'
 require 'terraform-enterprise/commands/formatter'
 require 'terraform-enterprise/commands/strings'
+require 'terraform-enterprise/commands/util'
 
 module TerraformEnterprise
   module Commands
     # Base class for all commands
     class Command < Thor
       include TerraformEnterprise::Commands
+      include TerraformEnterprise::Util::Tar
+
       CMD_STR = STRINGS[:options]
 
       class_option :host, type: :string, desc: CMD_STR[:host]

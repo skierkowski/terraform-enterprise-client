@@ -34,6 +34,15 @@ module TerraformEnterprise
         gzip_writer.close
         gzip_string.string
       end
+
+      def tarball(path)
+        full_path = File.expand_path(path)
+        if File.directory?(full_path)
+          gzip(tar(full_path))
+        else
+          File.read(full_path)
+        end
+      end
     end
   end
 end

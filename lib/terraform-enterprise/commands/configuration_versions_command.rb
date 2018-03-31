@@ -1,12 +1,9 @@
 require 'terraform-enterprise/commands/command'
-require 'terraform-enterprise/commands/util'
 
 module TerraformEnterprise
   module Commands
     # Configuration Version Commoand
     class ConfigurationVersionsCommand < TerraformEnterprise::Commands::Command
-      include TerraformEnterprise::Util::Tar
-
       ATTR_STR = STRINGS[:configuration_versions][:attributes]
       CMD_STR = STRINGS[:configuration_versions][:commands]
 
@@ -30,15 +27,8 @@ module TerraformEnterprise
 
       desc 'upload <path> <upload-url>', CMD_STR[:upload]
       def upload(path, url)
-        full_path = File.expand_path(path)
-        content =
-          if File.directory?(full_path)
-            gzip(tar(full_path))
-          else
-            File.read(full_path)
-          end
-
-        params = { content: content, url: url }
+        content = tarball(path)
+        params  = { content: content, url: url }
 
         render client.configuration_versions.upload(params)
       end
