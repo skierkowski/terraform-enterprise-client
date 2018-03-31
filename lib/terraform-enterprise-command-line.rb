@@ -32,7 +32,7 @@ module TerraformEnterprise
     desc 'variables <subcommand>', 'Manage variables'
     subcommand 'variables', VariablesCommand
 
-    desc 'configuration_versions <subcommand>', 'Manage configuration versions'
+    desc 'configuration-versions <subcommand>', 'Manage configuration versions'
     subcommand 'configuration_versions', ConfigurationVersionsCommand
 
     desc 'policies <subcommand>', 'Manage policies'
