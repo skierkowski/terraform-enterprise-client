@@ -67,8 +67,8 @@ module TerraformEnterprise
         request_options
       end
 
-      def execute(request)
-        RestClient::Request.execute(request)
+      def execute(request_params)
+        RestClient::Request.execute(request_params)
       rescue RestClient::ExceptionWithResponse => ex
         ex.response
       end
