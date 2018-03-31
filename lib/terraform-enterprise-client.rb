@@ -2,8 +2,8 @@ require 'json'
 require 'rest-client'
 
 require 'terraform-enterprise/client/request'
-require 'terraform-enterprise/resource_requests/configuration-versions'
-require 'terraform-enterprise/resource_requests/oauth-tokens'
+require 'terraform-enterprise/resource_requests/configuration_versions'
+require 'terraform-enterprise/resource_requests/oauth_tokens'
 require 'terraform-enterprise/resource_requests/organizations'
 require 'terraform-enterprise/resource_requests/policies'
 require 'terraform-enterprise/resource_requests/policy_checks'
@@ -47,6 +47,10 @@ module TerraformEnterprise
 
     def policies
       TerraformEnterprise::API::Policies.new(@request)
+    end
+
+    def policy_checks
+      TerraformEnterprise::API::PolicyChecks.new(@request)
     end
 
     def runs

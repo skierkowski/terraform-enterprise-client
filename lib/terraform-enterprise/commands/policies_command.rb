@@ -58,7 +58,7 @@ module TerraformEnterprise
         render client.policies.delete(id: id)
       end
 
-      desc 'upload <path> <policy_id>', CMD_STR[:upload]
+      desc 'upload <path> <policy-id>', CMD_STR[:upload]
       def upload(path, policy_id)
         full_path = File.expand_path(path)
         content = File.read(full_path)

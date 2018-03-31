@@ -22,7 +22,7 @@ module TerraformEnterprise
     desc 'workspaces <subcommand>', 'Manage workspaces'
     subcommand 'workspaces', WorkspacesCommand
 
-    desc 'oauth_tokens <subcommand>', 'Manage OAuth tokens'
+    desc 'oauth-tokens <subcommand>', 'Manage OAuth tokens'
     subcommand 'oauth_tokens', OAuthTokensCommand
 
     desc 'teams <subcommand>', 'Manage teams'
