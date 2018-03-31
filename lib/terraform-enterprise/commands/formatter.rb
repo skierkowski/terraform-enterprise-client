@@ -43,11 +43,9 @@ module TerraformEnterprise
       private_class_method
       def self.render_errors(obj)
         obj.errors.each do |error|
-          if error['status'] && error['title']
-            puts "Error (#{error['status']}): #{error['title']}".red
-          else
-            puts "Error (#{obj.code}): #{error}".red
-          end
+          message = error['detail'] || error['title'] || error.to_s
+          code    = error['status'] || obj.code
+          puts "Error (#{code}): #{message}".red
         end
         exit(false)
       end
