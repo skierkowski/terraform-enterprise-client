@@ -2,18 +2,46 @@ module TerraformEnterprise
   module API
     # A class wrapper for JSON-API resources
     class Resource
-      attr_accessor :type, :attributes, :id, :relationships, :links, :errors
-      def initialize(data)
-        @id            = data['id']
-        @type          = data['type']
-        @attributes    = data['attributes'] || {}
-        @relationships = data['relationships'] || {}
-        @links         = data['links'] || []
-        @errors        = data['errors'] || []
+      attr_reader :body
+
+      def initialize(body)
+        @body = body
       end
 
       def errors?
-        !@errors.empty?
+        !errors.empty?
+      end
+
+      def data
+        @body['data']
+      end
+
+      def id
+        @body['id']
+      end
+
+      def type
+        data['type']
+      end
+
+      def attributes
+        data['attributes'] || {}
+      end
+
+      def relationships
+        data['relationships'] || {}
+      end
+
+      def links
+        data['links'] || []
+      end
+
+      def errors
+        data['errors'] || []
+      end
+
+      def included
+        (body['included'] || []).map{ |resource| Resource.new('data' => resource)}
       end
     end
   end

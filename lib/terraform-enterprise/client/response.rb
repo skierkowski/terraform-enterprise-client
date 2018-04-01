@@ -15,8 +15,8 @@ module TerraformEnterprise
 
         @data      = @body['data'] || @body
         @errors    = @body['errors'] || []
-        @resource  = Resource.new(@data) if @data.is_a?(Hash)
-        @resources = @data.map { |row| Resource.new(row) } if @data.is_a?(Array)
+        @resource  = Resource.new(@body) if @data.is_a?(Hash)
+        @resources = @data.map { |row| Resource.new('data' => row) } if @data.is_a?(Array)
       end
 
       def errors?
