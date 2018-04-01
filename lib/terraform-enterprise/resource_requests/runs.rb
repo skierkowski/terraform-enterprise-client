@@ -39,7 +39,8 @@ module TerraformEnterprise
       end
 
       def get(params = {})
-        @request.get(:runs, params[:id])
+        id = params.delete(:id)
+        @request.get(:runs, id, params)
       end
 
       def action(params = {})
