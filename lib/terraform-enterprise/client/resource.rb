@@ -17,7 +17,7 @@ module TerraformEnterprise
       end
 
       def id
-        @body['id']
+        data['id']
       end
 
       def type
