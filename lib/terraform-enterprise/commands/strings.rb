@@ -96,13 +96,16 @@ module TerraformEnterprise
           list: 'List runs in a workspace',
           get: 'Get run details',
           apply: 'Apply the plan',
-          discard: 'Discard the plan'
+          discard: 'Discard the plan',
+          log: 'Return logs for the plan or apply'
         },
         attributes: {
           workspace_id: 'Workspace ID of which the run belongs to.',
           configuration_version_id: 'Configuration Version ID of the configuration version to run',
           destroy: 'The run should be a destroy plan',
-          comment: 'Add a comment for the action'
+          comment: 'Add a comment for the action',
+          follow: 'Follow the logs until output is complete',
+          event: 'Run event for which to get logs (plan or apply)'
         }
       },
       policy_checks: {

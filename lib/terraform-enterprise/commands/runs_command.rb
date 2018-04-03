@@ -43,15 +43,45 @@ module TerraformEnterprise
       end
 
       desc 'logs <id>', 'Logs'
-      option :event, type: :string, required: true, desc: 'Plan or apply', enum:['plan', 'apply']
+      option :event, type: :string, required: true, desc: ATTR_STR[:event], enum:['plan', 'apply']
+      option :follow, type: :boolean, default: false, desc: ATTR_STR[:follow]
       def logs(id)
-        event_type = options[:event] == 'plan' ? 'plans' : 'applies'
-        run_response = client.runs.get(id: id, include:[options[:event].to_sym])
+        following       = options[:follow]
+        finished        = false
+        exit_requested  = false
+        finished_states = %w[errored canceled finished]
+
+        # Listens for "control-c" to exit
+        Kernel.trap('INT') { exit_requested = true }
+
+        loop do
+          event    = get_event_resource(id, options[:event])
+          url      = event.attributes['log-read-url']
+          finished = finished_states.include?(event.attributes['status'].to_s)
+          logs     = RestClient.get(url).body
+          
+          # errase screen and go to (0,0)
+          print "\033[2J" if following
+          print logs
+
+          break if !following || exit_requested || finished
+          
+          sleep 2
+        end 
+      end
+
+      private
+
+      def get_event_resource(id, event)
+        event_type    = event == 'plan' ? 'plans' : 'applies'
+        error_message = "#{options[:event].to_s.capitalize} not started yet"
+        run_response  = client.runs.get(id: id, include: [event.to_sym])
         render run_response unless run_response.success?
-        event_resource = run_response.resource.included.detect{|r| r.type.to_s == event_type}
-        error! "#{options[:event].to_s.capitalize} not started yet" unless event_resource
-        url =  event_resource.attributes['log-read-url']
-        puts RestClient.get(url)
+        event_resource = run_response.resource.included.find do |er|
+          er.type.to_s == event_type
+        end
+        error! error_message unless event_resource
+        event_resource
       end
     end
   end
