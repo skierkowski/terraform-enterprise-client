@@ -7,6 +7,7 @@ A simple Ruby API client library for the [Terraform Enterprise API](https://www.
 [![Dependency Status](https://gemnasium.com/badges/github.com/skierkowski/terraform-enterprise-client.svg)](https://gemnasium.com/github.com/skierkowski/terraform-enterprise-client)
 [![Inline docs](http://inch-ci.org/github/skierkowski/terraform-enterprise-client.svg?branch=master)](http://inch-ci.org/github/skierkowski/terraform-enterprise-client)
 
+#### NOTE: The command line tool has moved to [skierkowski/terraform-enterprise-cli](https://github.com/skierkowski/terraform-enterprise-cli).
 
 ## Requirements
 
