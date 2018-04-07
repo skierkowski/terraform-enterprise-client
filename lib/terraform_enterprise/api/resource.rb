@@ -5,7 +5,7 @@ module TerraformEnterprise
       attr_reader :body
 
       def initialize(body)
-        @body = body
+        @body = body || {}
       end
 
       def errors?
@@ -13,7 +13,7 @@ module TerraformEnterprise
       end
 
       def data
-        @body['data']
+        @body['data'] || {}
       end
 
       def id
